@@ -52,8 +52,8 @@ public class AirlineReservationSystem {
     public static void main(String[] args) {
         AirlineReservationSystem system = new AirlineReservationSystem();
 
-        Flight flight1 = new Flight("A001", "Flight 101", "Dhaka", "2024-06-01", "10:00 AM", 500.0, 150);
-        Flight flight2 = new Flight("B002", "Flight 202", "Chicago", "2024-06-02", "2:00 PM", 300.0, 100);
+        Flight flight1 = new Flight("RF10", " Flight 101", " Dhaka ", "2024-06-01", "10:00 AM", 500.0, 150);
+        Flight flight2 = new Flight("N19T", " Flight 202", " Chicago ", "2024-06-02", "2:00 PM", 300.0, 100);
 
         system.addFlight(flight1);
         system.addFlight(flight2);
@@ -62,9 +62,9 @@ public class AirlineReservationSystem {
 
         while (true) {
             if (system.loggedInUser == null) {
-                System.out.println("1. Login");
-                System.out.println("2. Register");
-                System.out.println("3. Exit");
+                System.out.println("  1. Login");
+                System.out.println("  2. Register");
+                System.out.println("  3. Exit");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
                 switch (choice) {
@@ -75,9 +75,10 @@ public class AirlineReservationSystem {
                         String password = scanner.nextLine();
                         User user = system.login(username, password);
                         if (user != null) {
-                            System.out.println("Login Successful. Welcome " + user.getUsername());
+                            System.out.println(" ------>  Login Successful. Welcome " + user.getUsername()+ ",to our "
+                                    + "Airlines reservation system  <-------- ");
                         } else {
-                            System.out.println("Invalid Credentials.");
+                            System.out.println(".......... ): Invalid Username or Password :( ..........");
                         }
                         break;
                     case 2:
@@ -95,19 +96,19 @@ public class AirlineReservationSystem {
                         String region = scanner.nextLine();
                         User newUser = new User(newUsername, newPassword, gender, address, nid, region);
                         system.addUser(newUser);
-                        System.out.println("Registration Successful. Please Login.");
+                        System.out.println("    ------> Registration Successful. Please Login <------- ");
                         break;
                     case 3:
                         System.exit(0);
                 }
             } else {
-                System.out.println("1. Add Flight");
-                System.out.println("2. View Flights");
-                System.out.println("3. Book a Flight");
-                System.out.println("4. View Bookings");
-                System.out.println("5. Cancel Booking");
-                System.out.println("6. Make Payment");
-                System.out.println("7. Logout");
+                System.out.println("    1. Add Flight");
+                System.out.println("    2. View Flights");
+                System.out.println("    3. Book a Flight");
+                System.out.println("    4. View Bookings");
+                System.out.println("    5. Cancel Booking");
+                System.out.println("    6. Make Payment");
+                System.out.println("    7. Logout");
                 int choice = scanner.nextInt();
                 scanner.nextLine();
                 switch (choice) {
@@ -129,10 +130,10 @@ public class AirlineReservationSystem {
                         scanner.nextLine();
                         Flight newFlight = new Flight(flightNumber, flightName, source, departureDate, departureTime, flightPrice, capacity);
                         system.addFlight(newFlight);
-                        System.out.println("Flight Added Successfully.");
+                        System.out.println("    ............Flight Added Successfully..........");
                         break;
                     case 2:
-                        System.out.println("Available Flights:");
+                        System.out.println("    .........Available Flights:.........");
                         for (Flight flight : system.getFlights()) {
                             System.out.println(flight);
                         }
@@ -148,12 +149,12 @@ public class AirlineReservationSystem {
                             }
                         }
                         if (selectedFlight == null) {
-                            System.out.println("Flight not found.");
+                            System.out.println("..........Flight not found..........");
                             break;
                         }
                         Booking booking = new Booking(selectedFlight, system.loggedInUser);
                         system.makeBooking(booking);
-                        System.out.println("Booking Successful.");
+                        System.out.println("........Booking Successful.........");
                         break;
                     case 4:
                         System.out.println("Your Bookings:");
@@ -175,9 +176,9 @@ public class AirlineReservationSystem {
                         }
                         if (bookingToCancel != null) {
                             system.getBookings().remove(bookingToCancel);
-                            System.out.println("Booking Cancelled Successfully.");
+                            System.out.println("........Booking Cancelled Successfully........");
                         } else {
-                            System.out.println("Booking Not Found.");
+                            System.out.println(".......Booking Not Found........");
                         }
                         break;
                     case 6:
@@ -185,11 +186,11 @@ public class AirlineReservationSystem {
                         double amount = scanner.nextDouble();
                         scanner.nextLine();
                         Payment payment = new Payment(system.loggedInUser.getUsername() + System.currentTimeMillis(), amount);
-                        System.out.println("Payment Successful. Details: " + payment);
+                        System.out.println("........Payment Successful. Details: " + payment);
                         break;
                     case 7:
                         system.logout();
-                        System.out.println("Logged Out Successfully.");
+                        System.out.println("-------Logged Out Successfully---------");
                         break;
                 }
             }
